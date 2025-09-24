@@ -5,108 +5,178 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manoj Hatalageri | Portfolio</title>
   <style>
-    /* Reset */
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      background: #f4f7fa;
-      color: #333;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f2027;  /* gradient bg */
+      background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* Particle background */
+    #particles {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: -1;
+      background: radial-gradient(rgba(255,255,255,.1), transparent 70%) repeat;
+      background-size: 40px 40px;
+      animation: moveBg 15s linear infinite;
+    }
+    @keyframes moveBg {
+      from { background-position: 0 0; }
+      to { background-position: 100px 100px; }
     }
 
     /* Header */
     header {
-      background: linear-gradient(135deg, #0077b6, #00b4d8);
-      color: #fff;
-      padding: 2rem 1rem;
       text-align: center;
+      padding: 3rem 1rem;
       animation: fadeDown 1s ease-in-out;
     }
-    header h1 { font-size: 2.5rem; }
-    header p { font-size: 1.2rem; margin-top: .5rem; }
-
-    nav {
-      margin-top: 1rem;
+    header h1 {
+      font-size: 2.8rem;
+      margin-bottom: 0.5rem;
     }
+    header p {
+      font-size: 1.2rem;
+      border-right: 3px solid #ffd60a;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 4s steps(25, end) forwards, blink .7s infinite;
+    }
+    nav { margin-top: 1rem; }
     nav a {
-      margin: 0 .7rem;
-      color: #fff;
+      margin: 0 .8rem;
+      color: #ffd60a;
       text-decoration: none;
       font-weight: bold;
-      transition: color .3s;
+      position: relative;
     }
-    nav a:hover { color: #ffd60a; }
+    nav a::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 2px;
+      background: #ffd60a;
+      transition: width .3s;
+      margin: auto;
+    }
+    nav a:hover::after { width: 100%; }
 
-    /* Section layout */
+    /* Sections */
     section {
       max-width: 1000px;
       margin: 2rem auto;
       padding: 1.5rem;
-      background: #fff;
-      border-radius: 12px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-      animation: fadeUp 1s ease-in-out;
+      background: rgba(255,255,255,0.05);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+    section.show {
+      opacity: 1;
+      transform: translateY(0);
     }
     section h2 {
       margin-bottom: 1rem;
-      border-left: 5px solid #00b4d8;
-      padding-left: .5rem;
-      color: #0077b6;
+      border-left: 6px solid #ffd60a;
+      padding-left: .7rem;
+      color: #ffd60a;
     }
 
-    /* Skills */
-    .skills-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: .5rem;
+    /* Timeline */
+    .timeline {
+      position: relative;
+      margin: 2rem 0;
+      padding-left: 30px;
     }
-    .skills-list span {
-      background: #00b4d8;
-      color: #fff;
-      padding: .4rem .8rem;
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 10px;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: #ffd60a;
+    }
+    .timeline-item {
+      margin: 1.5rem 0;
+      padding: 1rem;
+      background: rgba(0,0,0,0.3);
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
+      transform: translateX(-50px);
+      opacity: 0;
+      transition: all 1s ease;
+    }
+    .timeline-item.show {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    .timeline-item h3 { color: #ffd60a; }
+
+    /* Skills bar */
+    .skills-bar { margin: 0.8rem 0; }
+    .bar {
+      background: rgba(255,255,255,0.2);
       border-radius: 20px;
-      font-size: .9rem;
-      transition: transform .3s;
+      overflow: hidden;
+      height: 12px;
     }
-    .skills-list span:hover {
-      transform: scale(1.1);
-      background: #0077b6;
+    .bar span {
+      display: block;
+      height: 100%;
+      background: linear-gradient(90deg, #ffd60a, #ff9f1c);
+      width: 0;
+      transition: width 2s ease;
     }
 
-    /* Projects */
-    .project {
-      margin-bottom: 1rem;
+    /* Hover card */
+    .card:hover {
+      transform: scale(1.05);
+      transition: transform .4s, box-shadow .4s;
+      box-shadow: 0 10px 30px rgba(255,214,10,0.6);
     }
-    .project h3 { color: #0077b6; }
-    .project p { margin-left: 1rem; }
 
-    /* Footer */
     footer {
       text-align: center;
       padding: 1rem;
-      background: #0077b6;
-      color: #fff;
+      background: rgba(0,0,0,0.6);
+      color: #ffd60a;
       margin-top: 2rem;
     }
+    footer a {
+      color: #fff;
+      margin: 0 10px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color .3s;
+    }
+    footer a:hover { color: #ffd60a; }
 
     /* Animations */
-    @keyframes fadeUp {
-      from { transform: translateY(30px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
     @keyframes fadeDown {
-      from { transform: translateY(-30px); opacity: 0; }
+      from { transform: translateY(-40px); opacity: 0; }
       to { transform: translateY(0); opacity: 1; }
     }
-
-    /* Responsive */
-    @media (max-width: 768px) {
-      header h1 { font-size: 1.8rem; }
-      section { margin: 1rem; }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 22ch; }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
     }
   </style>
 </head>
 <body>
+
+  <div id="particles"></div>
 
   <header>
     <h1>Manoj Hatalageri</h1>
@@ -121,68 +191,118 @@
     </nav>
   </header>
 
-  <section id="education">
+  <section id="education" class="card">
     <h2>Education</h2>
-    <p><strong>AGM Rural College of Engineering and Technology</strong> - B.E. CSE (2021–2025), CGPA: 8.04</p>
-    <p><strong>Smt Vidya P Hanchinmani College</strong> - PUC Science (2019–2021), 76.70%</p>
-    <p><strong>JSS Shri Manjunatheshwara English Medium School</strong> - SSLC (2018–2019), 85.60%</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>AGMRCET</h3>
+        <p>B.E. CSE (2021–2025), CGPA: 8.04</p>
+      </div>
+      <div class="timeline-item">
+        <h3>Smt Vidya P Hanchinmani College</h3>
+        <p>PUC Science (2019–2021), 76.70%</p>
+      </div>
+      <div class="timeline-item">
+        <h3>JSS Shri Manjunatheshwara School</h3>
+        <p>SSLC (2018–2019), 85.60%</p>
+      </div>
+    </div>
   </section>
 
-  <section id="experience">
+  <section id="experience" class="card">
     <h2>Experience</h2>
-    <p><strong>XWORKZ</strong> - Software Intern (Feb 2025 – Present)</p>
-    <p><strong>GIT Hubli</strong> - Intern (Oct 2023 – Dec 2023)</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <h3>XWORKZ</h3>
+        <p>Software Intern (Feb 2025 – Present)</p>
+      </div>
+      <div class="timeline-item">
+        <h3>GIT Hubli</h3>
+        <p>Intern (Oct 2023 – Dec 2023)</p>
+      </div>
+    </div>
   </section>
 
-  <section id="skills">
+  <section id="skills" class="card">
     <h2>Skills</h2>
-    <div class="skills-list">
-      <span>C</span><span>Java</span><span>Python</span>
-      <span>DBMS</span><span>SQL</span>
-      <span>VS Code</span><span>Python IDLE</span>
+    <div class="skills-bar">
+      <p>Java</p>
+      <div class="bar"><span data-skill="90%"></span></div>
+    </div>
+    <div class="skills-bar">
+      <p>Python</p>
+      <div class="bar"><span data-skill="80%"></span></div>
+    </div>
+    <div class="skills-bar">
+      <p>C</p>
+      <div class="bar"><span data-skill="75%"></span></div>
+    </div>
+    <div class="skills-bar">
+      <p>SQL / DBMS</p>
+      <div class="bar"><span data-skill="85%"></span></div>
     </div>
   </section>
 
-  <section id="projects">
+  <section id="projects" class="card">
     <h2>Projects</h2>
-    <div class="project">
-      <h3>Driver Drowsiness Detection System</h3>
-      <p>Developed using Arduino Uno & eye-blink sensors. Implemented alerts & vehicle safety shutdown.</p>
-    </div>
-    <div class="project">
-      <h3>Hand Gesture Volume Control</h3>
-      <p>Python with OpenCV, Mediapipe & PyAutoGUI. Controlled volume via gesture recognition.</p>
-    </div>
+    <p><strong>Driver Drowsiness Detection</strong> – Arduino Uno + Sensors, real-time safety alerts.</p>
+    <p><strong>Hand Gesture Volume Control</strong> – Python + OpenCV, gesture-based media control.</p>
   </section>
 
-  <section id="certifications">
+  <section id="certifications" class="card">
     <h2>Certifications</h2>
     <ul>
-      <li>Oracle Cloud Data Management Foundation - Oracle</li>
-      <li>Deep Learning using TensorFlow - IBM</li>
-      <li>Web Development - Acme Grade</li>
-      <li>Intro to Generative AI - Google Cloud SkillsBoost</li>
-      <li>AI for India 2.0 - Skill India NSDC</li>
+      <li>Oracle Cloud Data Management Foundation</li>
+      <li>Deep Learning with TensorFlow – IBM</li>
+      <li>Web Development – Acme Grade</li>
+      <li>Intro to Generative AI – Google Cloud SkillsBoost</li>
+      <li>AI for India 2.0 – NSDC</li>
     </ul>
   </section>
 
-  <section id="awards">
+  <section id="awards" class="card">
     <h2>Honors & Awards</h2>
     <ul>
-      <li>Certified Campus Ambassador - ICFAI Business School</li>
-      <li>3rd Place - Ideathon Competition @ AGM College Hubli</li>
+      <li>Campus Ambassador – ICFAI Business School</li>
+      <li>3rd Place – Ideathon Competition @ AGM Hubli</li>
     </ul>
   </section>
 
   <footer>
     <p>📧 manojhatalageri2508@gmail.com | 📞 9019036168</p>
     <p>
-      <a href="https://www.linkedin.com/in/manoj-hatalageri-27188a227" target="_blank" style="color:#ffd60a;">LinkedIn</a> |
-      <a href="https://github.com/Mancar123" target="_blank" style="color:#ffd60a;">GitHub</a> |
-      <a href="https://carsman2508.blogspot.com/" target="_blank" style="color:#ffd60a;">Blog</a>
+      <a href="https://www.linkedin.com/in/manoj-hatalageri-27188a227" target="_blank">LinkedIn</a> |
+      <a href="https://github.com/Mancar123" target="_blank">GitHub</a> |
+      <a href="https://carsman2508.blogspot.com/" target="_blank">Blog</a>
     </p>
   </footer>
 
+  <script>
+    // Reveal sections on scroll
+    const sections = document.querySelectorAll("section");
+    const timelineItems = document.querySelectorAll(".timeline-item");
+    const skillBars = document.querySelectorAll(".bar span");
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting) {
+          entry.target.classList.add("show");
+
+          // Animate skill bars
+          if(entry.target.classList.contains("card")) {
+            entry.target.querySelectorAll("span[data-skill]").forEach(bar => {
+              bar.style.width = bar.dataset.skill;
+            });
+          }
+        }
+      });
+    }, { threshold: 0.2 });
+
+    sections.forEach(sec => observer.observe(sec));
+    timelineItems.forEach(item => observer.observe(item));
+  </script>
+
 </body>
 </html>
+
 
