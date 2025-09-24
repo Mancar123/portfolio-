@@ -5,182 +5,122 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manoj Hatalageri | Portfolio</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #0f2027;  /* gradient bg */
-      background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
-      color: #fff;
-      overflow-x: hidden;
+    *{margin:0;padding:0;box-sizing:border-box;}
+    body{
+      font-family:'Segoe UI',sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color:#fff;overflow-x:hidden;
     }
 
-    /* Particle background */
-    #particles {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -1;
-      background: radial-gradient(rgba(255,255,255,.1), transparent 70%) repeat;
-      background-size: 40px 40px;
-      animation: moveBg 15s linear infinite;
+    /* Hero Section */
+    header{
+      text-align:center;
+      padding:4rem 1rem 6rem;
+      position:relative;
     }
-    @keyframes moveBg {
-      from { background-position: 0 0; }
-      to { background-position: 100px 100px; }
+    header h1{font-size:3rem;margin-bottom:.5rem;}
+    header p{font-size:1.4rem;color:#ffd60a;}
+    nav{margin-top:1.5rem;}
+    nav a{
+      margin:0 1rem;color:#fff;text-decoration:none;
+      font-weight:bold;position:relative;transition:.3s;
     }
-
-    /* Header */
-    header {
-      text-align: center;
-      padding: 3rem 1rem;
-      animation: fadeDown 1s ease-in-out;
-    }
-    header h1 {
-      font-size: 2.8rem;
-      margin-bottom: 0.5rem;
-    }
-    header p {
-      font-size: 1.2rem;
-      border-right: 3px solid #ffd60a;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 0;
-      animation: typing 4s steps(25, end) forwards, blink .7s infinite;
-    }
-    nav { margin-top: 1rem; }
-    nav a {
-      margin: 0 .8rem;
-      color: #ffd60a;
-      text-decoration: none;
-      font-weight: bold;
-      position: relative;
-    }
-    nav a::after {
-      content: "";
-      display: block;
-      width: 0;
-      height: 2px;
-      background: #ffd60a;
-      transition: width .3s;
-      margin: auto;
-    }
-    nav a:hover::after { width: 100%; }
+    nav a:hover{color:#ffd60a;}
 
     /* Sections */
-    section {
-      max-width: 1000px;
-      margin: 2rem auto;
-      padding: 1.5rem;
-      background: rgba(255,255,255,0.05);
-      border-radius: 15px;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-      opacity: 0;
-      transform: translateY(50px);
-      transition: all 1s ease;
+    section{
+      max-width:1000px;margin:2rem auto;
+      padding:2rem;
+      background:rgba(255,255,255,0.07);
+      border-radius:20px;
+      backdrop-filter:blur(12px);
+      box-shadow:0 8px 25px rgba(0,0,0,0.3);
+      opacity:0;transform:translateY(40px);
+      transition:all 1s ease;
     }
-    section.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    section h2 {
-      margin-bottom: 1rem;
-      border-left: 6px solid #ffd60a;
-      padding-left: .7rem;
-      color: #ffd60a;
+    section.show{opacity:1;transform:translateY(0);}
+    section h2{
+      margin-bottom:1rem;
+      border-left:6px solid #ffd60a;
+      padding-left:.7rem;color:#ffd60a;
     }
 
     /* Timeline */
-    .timeline {
-      position: relative;
-      margin: 2rem 0;
-      padding-left: 30px;
+    .timeline{position:relative;margin:2rem 0;padding-left:30px;}
+    .timeline::before{
+      content:"";position:absolute;left:10px;top:0;bottom:0;
+      width:4px;background:#ffd60a;
     }
-    .timeline::before {
-      content: "";
-      position: absolute;
-      left: 10px;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      background: #ffd60a;
+    .timeline-item{
+      margin:1.5rem 0;padding:1rem;
+      background:rgba(0,0,0,0.4);
+      border-radius:12px;
+      box-shadow:0 4px 12px rgba(0,0,0,0.5);
+      opacity:0;transform:translateX(-50px);
+      transition:all 1s ease;
     }
-    .timeline-item {
-      margin: 1.5rem 0;
-      padding: 1rem;
-      background: rgba(0,0,0,0.3);
-      border-radius: 12px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-      transform: translateX(-50px);
-      opacity: 0;
-      transition: all 1s ease;
-    }
-    .timeline-item.show {
-      transform: translateX(0);
-      opacity: 1;
-    }
-    .timeline-item h3 { color: #ffd60a; }
+    .timeline-item.show{opacity:1;transform:translateX(0);}
+    .timeline-item h3{color:#ffd60a;}
 
-    /* Skills bar */
-    .skills-bar { margin: 0.8rem 0; }
-    .bar {
-      background: rgba(255,255,255,0.2);
-      border-radius: 20px;
-      overflow: hidden;
-      height: 12px;
+    /* Skills as circles */
+    .skills-grid{
+      display:flex;flex-wrap:wrap;
+      gap:1.5rem;justify-content:center;
     }
-    .bar span {
-      display: block;
-      height: 100%;
-      background: linear-gradient(90deg, #ffd60a, #ff9f1c);
-      width: 0;
-      transition: width 2s ease;
+    .skill{
+      width:120px;height:120px;border-radius:50%;
+      background:conic-gradient(#ffd60a 0deg, #444 0deg);
+      display:flex;align-items:center;justify-content:center;
+      flex-direction:column;position:relative;
+      font-weight:bold;
+      animation:grow 1.5s forwards;
+    }
+    .skill span{font-size:.9rem;margin-top:.3rem;}
+    @keyframes grow{from{transform:scale(.7);opacity:0;}to{transform:scale(1);opacity:1;}}
+
+    /* Hover effect */
+    .card:hover{transform:scale(1.03);transition:.4s;
+      box-shadow:0 10px 30px rgba(255,214,10,0.6);
     }
 
-    /* Hover card */
-    .card:hover {
-      transform: scale(1.05);
-      transition: transform .4s, box-shadow .4s;
-      box-shadow: 0 10px 30px rgba(255,214,10,0.6);
+    /* Footer Waves */
+    footer{
+      position:relative;margin-top:3rem;
+      background:#0f2027;text-align:center;
+      padding:2rem;color:#ffd60a;
+      overflow:hidden;
     }
+    .wave{
+      position:absolute;bottom:0;left:0;
+      width:200%;height:100px;
+      background:url('https://i.ibb.co/r3h8QTx/wave.png');
+      background-size:1000px 100px;
+      animation:waves 10s linear infinite;
+      opacity:.5;
+    }
+    .wave:nth-child(2){bottom:10px;animation-duration:15s;opacity:.3;}
+    .wave:nth-child(3){bottom:20px;animation-duration:20s;opacity:.2;}
+    @keyframes waves{from{background-position-x:0;}to{background-position-x:1000px;}}
 
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background: rgba(0,0,0,0.6);
-      color: #ffd60a;
-      margin-top: 2rem;
-    }
-    footer a {
-      color: #fff;
-      margin: 0 10px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: color .3s;
-    }
-    footer a:hover { color: #ffd60a; }
+    footer a{color:#fff;margin:0 10px;text-decoration:none;transition:.3s;}
+    footer a:hover{color:#ffd60a;}
 
-    /* Animations */
-    @keyframes fadeDown {
-      from { transform: translateY(-40px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+    /* Typing Effect */
+    .typing{
+      display:inline-block;
+      border-right:3px solid #ffd60a;
+      white-space:nowrap;overflow:hidden;
+      width:0;animation:typing 4s steps(25,end) forwards, blink .7s infinite;
     }
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 22ch; }
-    }
-    @keyframes blink {
-      50% { border-color: transparent; }
-    }
+    @keyframes typing{from{width:0;}to{width:21ch;}}
+    @keyframes blink{50%{border-color:transparent;}}
   </style>
 </head>
 <body>
 
-  <div id="particles"></div>
-
   <header>
     <h1>Manoj Hatalageri</h1>
-    <p>Java Full Stack Developer</p>
+    <p class="typing">Java Full Stack Developer</p>
     <nav>
       <a href="#education">Education</a>
       <a href="#experience">Experience</a>
@@ -194,52 +134,27 @@
   <section id="education" class="card">
     <h2>Education</h2>
     <div class="timeline">
-      <div class="timeline-item">
-        <h3>AGMRCET</h3>
-        <p>B.E. CSE (2021–2025), CGPA: 8.04</p>
-      </div>
-      <div class="timeline-item">
-        <h3>Smt Vidya P Hanchinmani College</h3>
-        <p>PUC Science (2019–2021), 76.70%</p>
-      </div>
-      <div class="timeline-item">
-        <h3>JSS Shri Manjunatheshwara School</h3>
-        <p>SSLC (2018–2019), 85.60%</p>
-      </div>
+      <div class="timeline-item"><h3>AGMRCET</h3><p>B.E. CSE (2021–2025), CGPA: 8.04</p></div>
+      <div class="timeline-item"><h3>Smt Vidya P Hanchinmani College</h3><p>PUC Science (2019–2021), 76.70%</p></div>
+      <div class="timeline-item"><h3>JSS Shri Manjunatheshwara School</h3><p>SSLC (2018–2019), 85.60%</p></div>
     </div>
   </section>
 
   <section id="experience" class="card">
     <h2>Experience</h2>
     <div class="timeline">
-      <div class="timeline-item">
-        <h3>XWORKZ</h3>
-        <p>Software Intern (Feb 2025 – Present)</p>
-      </div>
-      <div class="timeline-item">
-        <h3>GIT Hubli</h3>
-        <p>Intern (Oct 2023 – Dec 2023)</p>
-      </div>
+      <div class="timeline-item"><h3>XWORKZ</h3><p>Software Intern (Feb 2025 – Present)</p></div>
+      <div class="timeline-item"><h3>GIT Hubli</h3><p>Intern (Oct 2023 – Dec 2023)</p></div>
     </div>
   </section>
 
   <section id="skills" class="card">
     <h2>Skills</h2>
-    <div class="skills-bar">
-      <p>Java</p>
-      <div class="bar"><span data-skill="90%"></span></div>
-    </div>
-    <div class="skills-bar">
-      <p>Python</p>
-      <div class="bar"><span data-skill="80%"></span></div>
-    </div>
-    <div class="skills-bar">
-      <p>C</p>
-      <div class="bar"><span data-skill="75%"></span></div>
-    </div>
-    <div class="skills-bar">
-      <p>SQL / DBMS</p>
-      <div class="bar"><span data-skill="85%"></span></div>
+    <div class="skills-grid">
+      <div class="skill" style="background:conic-gradient(#ffd60a 0 324deg,#444 0 360deg);">90% <span>Java</span></div>
+      <div class="skill" style="background:conic-gradient(#ffd60a 0 288deg,#444 0 360deg);">80% <span>Python</span></div>
+      <div class="skill" style="background:conic-gradient(#ffd60a 0 270deg,#444 0 360deg);">75% <span>C</span></div>
+      <div class="skill" style="background:conic-gradient(#ffd60a 0 306deg,#444 0 360deg);">85% <span>SQL/DBMS</span></div>
     </div>
   </section>
 
@@ -275,34 +190,22 @@
       <a href="https://github.com/Mancar123" target="_blank">GitHub</a> |
       <a href="https://carsman2508.blogspot.com/" target="_blank">Blog</a>
     </p>
+    <div class="wave"></div>
+    <div class="wave"></div>
+    <div class="wave"></div>
   </footer>
 
   <script>
-    // Reveal sections on scroll
-    const sections = document.querySelectorAll("section");
-    const timelineItems = document.querySelectorAll(".timeline-item");
-    const skillBars = document.querySelectorAll(".bar span");
-
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if(entry.isIntersecting) {
-          entry.target.classList.add("show");
-
-          // Animate skill bars
-          if(entry.target.classList.contains("card")) {
-            entry.target.querySelectorAll("span[data-skill]").forEach(bar => {
-              bar.style.width = bar.dataset.skill;
-            });
-          }
-        }
+    // Scroll reveal
+    const sections=document.querySelectorAll("section");
+    const timelineItems=document.querySelectorAll(".timeline-item");
+    const observer=new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){entry.target.classList.add("show");}
       });
-    }, { threshold: 0.2 });
-
-    sections.forEach(sec => observer.observe(sec));
-    timelineItems.forEach(item => observer.observe(item));
+    },{threshold:0.2});
+    sections.forEach(sec=>observer.observe(sec));
+    timelineItems.forEach(item=>observer.observe(item));
   </script>
-
 </body>
 </html>
-
-
